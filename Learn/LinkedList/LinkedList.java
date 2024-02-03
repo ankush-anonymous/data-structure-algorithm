@@ -184,34 +184,119 @@ public class LinkedList {
 
     }
 
-    public void FindAndRemoveNthNode(int key) {
-        Node prev = null;
-        Node current = head;
-        while (current.next != null) {
-
+    // remove nth node from last
+    public void FindAndRemoveNthNode(int pos) {
+        // calculate size
+        int size = 0;
+        Node temp = head;
+        while (temp != null) {
+            temp = temp.next;
+            size++;
         }
+
+        // if i want to remove head
+        if (pos == size) {
+            head = head.next;
+            return;
+        }
+
+        Node prev = head;
+        int i = 1;
+        int iToN = size - pos;
+
+        while (i < iToN) {
+            prev = prev.next;
+            i++;
+        }
+
+        prev.next = prev.next.next;
+        return;
+
+    }
+
+    // slow fast pointer
+    public Node findMid(Node head) {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next; // jumps 1
+            fast = fast.next.next; // jumps 2
+        }
+
+        return slow;
+
+    }
+
+    // check Palindrome
+    public boolean checkPalindrome() {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        // find midPoint
+        Node minNode = findMid(head);
+
+        // reverse second part of linkedList
+        Node prev = null;
+        Node current = minNode;
+        Node next;
+
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        // compare first & second part
+        Node left = head;
+        Node right = prev;
+
+        while (right.next != null) {
+            if (left.data != right.data) {
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+        return true;
+
     }
 
     public static void main(String[] args) {
-        LinkedList list1 = new LinkedList();
-        list1.AddNodeAtFirst(2);
-        list1.AddNodeAtFirst(1);
-        list1.AddNodeAtFirst(0);
-        list1.AddNodeAtLast(3);
-        list1.AddNodeAtLast(4);
+        // LinkedList list1 = new LinkedList();
+        // list1.AddNodeAtFirst(2);
+        // list1.AddNodeAtFirst(1);
+        // list1.AddNodeAtFirst(0);
+        // list1.AddNodeAtLast(3);
+        // list1.AddNodeAtLast(4);
 
-        list1.AddNodeAtMiddle(100, 1);
+        // list1.AddNodeAtMiddle(100, 1);
 
-        list1.RemoveFromFirst();
+        // list1.RemoveFromFirst();
 
-        // list1.iterativeSearch(100);
+        // // list1.iterativeSearch(100);
 
-        Node temp = head;
-        list1.recursiveSearch(1, 0, temp);
+        // Node temp = head;
+        // list1.recursiveSearch(1, 0, temp);
 
-        list1.reverseLinkedList();
+        // list1.reverseLinkedList();
 
-        list1.printLinkedList();
+        // list1.printLinkedList();
+        // list1.FindAndRemoveNthNode(2);
+        // list1.printLinkedList();
+
+        LinkedList list2 = new LinkedList();
+        list2.AddNodeAtLast(1);
+        list2.AddNodeAtLast(2);
+        list2.AddNodeAtLast(3);
+        list2.AddNodeAtLast(3);
+        list2.AddNodeAtLast(2);
+        list2.AddNodeAtLast(1);
+
+        list2.printLinkedList();
+        System.out.println(list2.checkPalindrome());
 
     }
 }

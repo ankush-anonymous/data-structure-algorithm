@@ -116,6 +116,7 @@ public class DoublyLinkedList {
         DoublyLinkedList list = new DoublyLinkedList();
         list.AddNodeAtLast(1);
         list.AddNodeAtLast(2);
+
         // list.AddNodeAtFirst(0);
         // list.AddNodeAtFirst(1);
         // list.AddNodeAtFirst(2);

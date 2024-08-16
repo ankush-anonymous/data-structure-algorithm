@@ -28,7 +28,13 @@ public class HashMapBasics {
         System.out.println(hm.isEmpty());
 
         // .clear() => to clear the hashMap
-        hm.clear();
+        // hm.clear();
+
+        // to iterate in hashMap
+        Set<String> keys = hm.keySet();
+        for (String key : keys) {
+            System.out.println(key + " = " + hm.get(key));
+        }
 
     }
 }

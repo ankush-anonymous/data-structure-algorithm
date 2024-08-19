@@ -6,12 +6,15 @@ import java.util.Set;
 public class MajorityElement {
     public static void findCount(int arr[], HashMap<Integer, Integer> hm) {
         for (int i = 0; i < arr.length; i++) {
-            if (hm.containsKey(arr[i])) {
-                int c = hm.get(arr[i]);
-                hm.put(arr[i], c + 1);
-            } else {
-                hm.put(arr[i], 1);
-            }
+            // if (hm.containsKey(arr[i])) {
+            // int c = hm.get(arr[i]);
+            // hm.put(arr[i], c + 1);
+            // } else {
+            // hm.put(arr[i], 1);
+            // }
+
+            // alternate of line 9-14
+            hm.put(arr[i], hm.getOrDefault(arr[i], 0) + 1);
         }
     }
 
